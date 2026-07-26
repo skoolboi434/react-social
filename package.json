@@ -13,6 +13,7 @@
     "@babel/core": "^7.29.7",
     "@babel/preset-env": "^7.29.7",
     "@babel/preset-react": "^7.29.7",
+    "axios": "^1.18.1",
     "babel-loader": "^8.2.5",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
