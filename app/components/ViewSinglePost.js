@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Page from './Page';
 import axios from 'axios';
+import ReactMarkdown from 'react-markdown';
 import { useParams, Link } from 'react-router-dom';
+import LoadingDotsIcon from './LoadingDotsIcon';
 
 const ViewSinglePost = () => {
   const { id } = useParams();
@@ -9,22 +11,27 @@ const ViewSinglePost = () => {
   const [post, setPost] = useState();
 
   useEffect(() => {
+    const ourRequest = axios.CancelToken.source();
+
     async function fetchPost() {
       try {
-        const response = await axios.get(`/post/${id}`);
+        const response = await axios.get(`/post/${id}`, { cancelToken: ourRequest.token });
         setPost(response.data);
         setIsLoading(false);
       } catch (e) {
-        console.log('There was a problem.');
+        console.log('There was a problem or the request was canceled..');
       }
     }
     fetchPost();
+    return () => {
+      ourRequest.cancel();
+    };
   }, []);
 
   if (isLoading)
     return (
       <Page title='...'>
-        <div>Loading...</div>
+        <LoadingDotsIcon />
       </Page>
     );
 
@@ -52,7 +59,9 @@ const ViewSinglePost = () => {
         Posted by <Link to={`/profile/${post.author.username}`}>{post.author.username}</Link> on {dateFormatted}
       </p>
 
-      <div className='body-content'>{post.body}</div>
+      <div className='body-content'>
+        <ReactMarkdown children={post.body} allowedElements={['p', 'br', 'strong', 'em', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'ul', 'ol', 'li']} />
+      </div>
     </Page>
   );
 };
