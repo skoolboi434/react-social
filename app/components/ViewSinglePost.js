@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Page from './Page';
 import axios from 'axios';
 import ReactMarkdown from 'react-markdown';
+import ReactTooltip, { Tooltip } from 'react-tooltip';
 import { useParams, Link } from 'react-router-dom';
 import LoadingDotsIcon from './LoadingDotsIcon';
 
@@ -43,12 +44,14 @@ const ViewSinglePost = () => {
       <div className='d-flex justify-content-between'>
         <h2>{post.title}</h2>
         <span className='pt-2'>
-          <a href='#' className='text-primary mr-2' title='Edit'>
+          <Link to={`/post/${post._id}/edit`} data-tooltip-content='Edit' data-tooltip-id='edit' className='text-primary mr-2'>
             <i className='fas fa-edit'></i>
-          </a>
-          <a className='delete-post-button text-danger' title='Delete'>
+          </Link>
+          <ReactTooltip id='edit' className='custom-tooltip' />
+          <a data-tooltip-content='Delete' data-tooltip-id='delete' className='delete-post-button text-danger'>
             <i className='fas fa-trash'></i>
           </a>
+          <ReactTooltip id='delete' className='custom-tooltip' />
         </span>
       </div>
 

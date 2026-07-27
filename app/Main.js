@@ -17,6 +17,7 @@ import CreatePost from './components/CreatePost';
 import ViewSinglePost from './components/ViewSinglePost';
 import FlashMessages from './components/FlashMessages';
 import Profile from './components/Profile';
+import EditPost from './components/EditPost';
 
 // Contexts
 import StateContext from './StateContext';
@@ -72,6 +73,7 @@ function Main() {
             <Route path='/' element={state.loggedIn ? <Home /> : <HomeGuest />} />
             <Route path='/create-post' element={<CreatePost />} />
             <Route path='/post/:id' element={<ViewSinglePost />} />
+            <Route path='/post/:id/edit' element={<EditPost />} />
             <Route path='/profile/:username/*' element={<Profile />} />
             <Route path='/about-us' element={<About />} />
             <Route path='/terms' element={<Terms />} />
