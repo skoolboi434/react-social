@@ -3,6 +3,7 @@ import Page from './Page';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import StateContext from '../StateContext';
+import ProfilePosts from './ProfilePosts';
 
 const Profile = () => {
   const { username } = useParams();
@@ -52,20 +53,7 @@ const Profile = () => {
         </Link>
       </div>
 
-      <div className='list-group'>
-        <Link to='#' className='list-group-item list-group-item-action'>
-          <img className='avatar-tiny' src='https://gravatar.com/avatar/b9408a09298632b5151200f3449434ef?s=128' /> <strong>Example Post #1</strong>
-          <span className='text-muted small'>on 2/10/2020 </span>
-        </Link>
-        <Link to='#' className='list-group-item list-group-item-action'>
-          <img className='avatar-tiny' src='https://gravatar.com/avatar/b9408a09298632b5151200f3449434ef?s=128' /> <strong>Example Post #2</strong>
-          <span className='text-muted small'>on 2/10/2020 </span>
-        </Link>
-        <Link to='#' className='list-group-item list-group-item-action'>
-          <img className='avatar-tiny' src='https://gravatar.com/avatar/b9408a09298632b5151200f3449434ef?s=128' /> <strong>Example Post #3</strong>
-          <span className='text-muted small'>on 2/10/2020 </span>
-        </Link>
-      </div>
+      <ProfilePosts />
     </Page>
   );
 };
